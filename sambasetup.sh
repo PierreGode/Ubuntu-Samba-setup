@@ -87,9 +87,6 @@ domaincontrolleryorn () {
   echo "versions of Windows Server. You can always manually change the levels"
   echo "if you wish... Press wisely!"
   echo ""
-
-
-
 read -p "Do you wish to use it (y/n)?" yn
    case $yn in
     [Yy]* ) upgradeforrestanddomain;;
@@ -97,7 +94,6 @@ read -p "Do you wish to use it (y/n)?" yn
     [Nn]* ) domaincontrolleryesorno;;
     * ) echo 'Please answer yes or no.';;
    esac
-done
 }
 
 # This asks the user if he or she would like to upgrade the domain and forest level.
