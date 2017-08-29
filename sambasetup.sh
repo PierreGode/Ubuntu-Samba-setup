@@ -8,8 +8,6 @@
     END=$(echo "\033[0m")
 # ~~~~~~~~~~  Environment Setup ~~~~~~~~~~ #
 
-# Initialization
-
 installsamba () {
   clear
   sudo apt-get update
@@ -17,20 +15,12 @@ installsamba () {
   mainmenu
   }
 
-# Downloads and installs samba and its required components to operate as an AD DS DC.
-# After samba has finished installing, it returns to the main menu.
-
-# Depreciated
 installvsftpd () {
   clear
   sudo apt-get update
   sudo apt-get -y install vsftpd
   mainmenu
   }
-
-# This installs VSFTPd and return to the main menu.
-# Depreciated, use SSH for SFTP access as it is far more secure than standard FTP.
-
 
 installwebmin () {
   clear
@@ -42,8 +32,6 @@ installwebmin () {
   mainmenu
   }
 
-# This installs the current version of WebMin and then returns to the main menu.
-
 updatesystem () {
   clear
   sudo apt-get update
@@ -53,9 +41,6 @@ updatesystem () {
   read -n 1
   mainmenu
   }
-
-# This install the latest updates for the system and then returns to the main menu.
-
 
 configuresambaforactivedirectory () {
   clear
@@ -75,9 +60,6 @@ configuresambaforactivedirectory () {
   domaincontrolleryorn
   }
 
-# This function runs all of the necessary actions to make samba a domain controller.
-
-
 domaincontrolleryorn () {
   clear
   echo "Did you set this installation as a primary domain controller?"
@@ -95,9 +77,6 @@ read -p "Do you wish to use it (y/n)?" yn
     * ) echo 'Please answer yes or no.';;
    esac
 }
-
-# This asks the user if he or she would like to upgrade the domain and forest level.
-# If yes then it routs the user to the code below. If not then the user is taken to the main menu.
 upgradeforrestanddomain () {
   clear
   sudo samba-tool domain level raise --domain-level=2008_R2
@@ -112,26 +91,16 @@ upgradeforrestanddomain () {
   read -n 1
   mainmenu
   }
-
-
-# This function upgrade the Domain and Forrest level to (Server) 2008_R2.
-# Acceptable levels are 2008 and 2008 R2. The default is 2003.
-
-
 quitprogram () {
   clear
-  echo "Sorry to see you go... :("
+  echo "Bye"
   exit
   }
 
-# This is a simple good by program closer.
-# Oh, did I mention that it stops the program?
-
-
 mainmenu () {
 clear
-    echo "${INTRO_TEXT}          Samba setup tool             ${INTRO_TEXT}"
-    echo "${INTRO_TEXT}       Created by Pierre Goude                  ${INTRO_TEXT}"
+    echo "${INTRO_TEXT}              Samba setup tool             ${INTRO_TEXT}"
+    echo "${INTRO_TEXT}             Created by Pierre Goude                  ${INTRO_TEXT}"
 	echo "${INTRO_TEXT} This script will edit several critical files.. ${INTRO_TEXT}"
 	echo "${INTRO_TEXT}  DO NOT attempt this without expert knowledge  ${INTRO_TEXT}"
     echo "${NORMAL}                                                    ${NORMAL}"
@@ -150,24 +119,24 @@ while [ opt != '' ]
     else
         case $opt in
         1) clear;
-            echo "Installing on Ubuntu Client/Server";
+            echo "Update your system";
             updatesystem;
             ;;
 
         2) clear;
-            echo "Installing on Debian Jessie client";
+            echo "Install samba";
             installsamba
             ;;
 	3) clear;
-	    echo "Installing on Debian Cent OS"
+	    echo "Install vsFTPd "
 	    installvsftpd
             ;;
 	4) clear;
-	    echo "Check for errors"
+	    echo "Install the current version of Webmin "
 	     installwebmin
             ;;
 	 5) clear;
-	     echo "Check in Ldap"
+	     echo "Configure samba for Active Directory"
 	     configuresambaforactivedirectory
              ;;
         x)exit;
@@ -184,10 +153,4 @@ while [ opt != '' ]
 fi
 done
 }
-
-# This builds the main menu and routs the user to the function selected.
-
 mainmenu
-
-# This executes the main menu function.
-# Let the fun begin!!!! WOOT WOOT!!!!
