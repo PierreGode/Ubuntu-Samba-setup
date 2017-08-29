@@ -45,6 +45,7 @@ updatesystem () {
 configuresambaforactivedirectory () {
   clear
   sudo service samba stop
+  sudo cp /etc/samba/smb.conf /etc/samba/smb.conf.bk
   sudo rm /etc/samba/smb.conf
   sudo rm /var/run/samba/*.tdb
   sudo rm /var/lib/samba/*.tdb
